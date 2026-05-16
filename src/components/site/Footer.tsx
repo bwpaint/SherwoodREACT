@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Container } from '@/components/ui/Container'
+import { NewsletterSignup } from './NewsletterSignup'
 
 type Hours = { days: string; hours: string }
 
@@ -31,7 +32,7 @@ export function Footer({ phone, email, address, hours, copyright }: Props) {
   return (
     <footer className="bg-gallery-teal-deep border-t-[3px] border-gallery-gold mt-12">
       <Container className="py-12">
-        <div className="grid gap-10 lg:grid-cols-3">
+        <div className="grid gap-10 lg:grid-cols-4">
           {/* Column 1: Brand */}
           <div>
             <h3 className="font-display font-bold text-2xl text-gallery-cream">
@@ -65,7 +66,10 @@ export function Footer({ phone, email, address, hours, copyright }: Props) {
             </ul>
           </div>
 
-          {/* Column 3: Contact */}
+          {/* Column 3: Newsletter */}
+          <NewsletterSignup />
+
+          {/* Column 4: Contact */}
           <div>
             <h4 className="font-body font-bold text-gallery-gold-light text-xs uppercase tracking-[0.15em]">
               Visit · Contact
