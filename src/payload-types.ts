@@ -69,6 +69,13 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    artists: Artist;
+    galleries: Gallery;
+    paintings: Painting;
+    pages: Page;
+    posts: Post;
+    'form-submissions': FormSubmission;
+    'newsletter-subscribers': NewsletterSubscriber;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +85,13 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    artists: ArtistsSelect<false> | ArtistsSelect<true>;
+    galleries: GalleriesSelect<false> | GalleriesSelect<true>;
+    paintings: PaintingsSelect<false> | PaintingsSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    posts: PostsSelect<false> | PostsSelect<true>;
+    'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
+    'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -87,8 +101,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -123,6 +141,8 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
+  firstName?: string | null;
+  lastName?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -148,7 +168,14 @@ export interface User {
  */
 export interface Media {
   id: number;
+  /**
+   * Descriptive alt text for accessibility and SEO.
+   */
   alt: string;
+  /**
+   * Optional caption shown beneath the image.
+   */
+  caption?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -160,6 +187,405 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    card?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    hero?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "artists".
+ */
+export interface Artist {
+  id: number;
+  name: string;
+  /**
+   * URL slug (auto-generated from name).
+   */
+  slug: string;
+  /**
+   * Square or near-square headshot.
+   */
+  portrait?: (number | null) | Media;
+  /**
+   * e.g. "Oil on Canvas & Linen"
+   */
+  medium?: string | null;
+  /**
+   * Tags shown beside the artist (e.g. Landscape, Bluebonnet).
+   */
+  specialty?:
+    | {
+        tag: string;
+        id?: string | null;
+      }[]
+    | null;
+  bio?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Show on the homepage featured artists strip.
+   */
+  isFeatured?: boolean | null;
+  /**
+   * Lower numbers appear first.
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "galleries".
+ */
+export interface Gallery {
+  id: number;
+  name: string;
+  slug: string;
+  description?: string | null;
+  /**
+   * Image shown on the gallery card and section header.
+   */
+  heroImage?: (number | null) | Media;
+  /**
+   * Lower numbers appear first.
+   */
+  order?: number | null;
+  /**
+   * Show on the public site.
+   */
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "paintings".
+ */
+export interface Painting {
+  id: number;
+  title: string;
+  slug: string;
+  /**
+   * The artist who created this work.
+   */
+  artist: number | Artist;
+  /**
+   * Which gallery sections this painting appears in.
+   */
+  galleries?: (number | Gallery)[] | null;
+  /**
+   * First image is the primary card image. Add detail shots as additional images.
+   */
+  images?:
+    | {
+        image: number | Media;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * e.g. "Oil on Canvas"
+   */
+  medium?: string | null;
+  /**
+   * e.g. '24" × 36"' — exact format shown publicly.
+   */
+  dimensions?: string | null;
+  /**
+   * Year the work was created.
+   */
+  year?: number | null;
+  /**
+   * Listing price in USD. Required if Price Display is "Show price".
+   */
+  price?: number | null;
+  /**
+   * How pricing appears on the painting card and detail page.
+   */
+  priceDisplay: 'inquire' | 'show' | 'sold-price';
+  status: 'available' | 'sold' | 'on-hold' | 'reserved';
+  /**
+   * Tick to feature this painting in the Recent Acquisitions section.
+   */
+  isRecentAcquisition?: boolean | null;
+  /**
+   * Date acquired. Used to order the Recent Acquisitions section.
+   */
+  acquiredDate?: string | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: number;
+  title: string;
+  /**
+   * URL slug. Special slugs: "home", "history", "contact".
+   */
+  slug: string;
+  /**
+   * Search-engine metadata for this page.
+   */
+  seo?: {
+    /**
+     * Defaults to page title if empty.
+     */
+    title?: string | null;
+    description?: string | null;
+    image?: (number | null) | Media;
+  };
+  /**
+   * Page content built from blocks.
+   */
+  layout?:
+    | (
+        | {
+            eyebrow?: string | null;
+            headlineLine1: string;
+            headlineLine2?: string | null;
+            subheadline?: string | null;
+            backgroundImage?: (number | null) | Media;
+            primaryCta?: {
+              label?: string | null;
+              href?: string | null;
+            };
+            secondaryCta?: {
+              label?: string | null;
+              href?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'hero';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            body?: {
+              root: {
+                type: string;
+                children: {
+                  type: any;
+                  version: number;
+                  [k: string]: unknown;
+                }[];
+                direction: ('ltr' | 'rtl') | null;
+                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                indent: number;
+                version: number;
+              };
+              [k: string]: unknown;
+            } | null;
+            background?: ('ivory' | 'ivory-warm' | 'teal' | 'teal-dark') | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'textBlock';
+          }
+        | {
+            quote: string;
+            attribution?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'blockquote';
+          }
+        | {
+            eyebrow?: string | null;
+            heading?: string | null;
+            milestones?:
+              | {
+                  /**
+                   * e.g. "1981" or "1990s"
+                   */
+                  year: string;
+                  title: string;
+                  body?: string | null;
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'timeline';
+          }
+        | {
+            image: number | Media;
+            overlayText?: string | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'imageBreak';
+          }
+        | {
+            heading: string;
+            body?: string | null;
+            primaryCta?: {
+              label?: string | null;
+              href?: string | null;
+            };
+            secondaryCta?: {
+              label?: string | null;
+              href?: string | null;
+            };
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'ctaBand';
+          }
+      )[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: number;
+  title: string;
+  slug: string;
+  status: 'draft' | 'published';
+  /**
+   * Set automatically when status flips to Published.
+   */
+  publishedAt?: string | null;
+  coverImage?: (number | null) | Media;
+  /**
+   * Shown on the blog index card.
+   */
+  excerpt?: string | null;
+  body?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  author?: (number | null) | User;
+  tags?:
+    | {
+        tag: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions".
+ */
+export interface FormSubmission {
+  id: number;
+  type: 'contact' | 'inquire' | 'framing';
+  status: 'new' | 'read' | 'replied' | 'archived';
+  name: string;
+  email: string;
+  phone?: string | null;
+  subject?: string | null;
+  message: string;
+  /**
+   * Set when the submission came from a painting "Inquire" button.
+   */
+  paintingRef?: (number | null) | Painting;
+  /**
+   * Hashed IP for rate-limiting; not personally identifiable.
+   */
+  ipHash?: string | null;
+  /**
+   * Internal notes (only visible in admin).
+   */
+  adminNotes?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-subscribers".
+ */
+export interface NewsletterSubscriber {
+  id: number;
+  email: string;
+  /**
+   * Where the signup came from (footer, inline form, etc.).
+   */
+  source?: string | null;
+  /**
+   * Mark true to exclude from CSV export.
+   */
+  unsubscribed?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -192,6 +618,34 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'artists';
+        value: number | Artist;
+      } | null)
+    | ({
+        relationTo: 'galleries';
+        value: number | Gallery;
+      } | null)
+    | ({
+        relationTo: 'paintings';
+        value: number | Painting;
+      } | null)
+    | ({
+        relationTo: 'pages';
+        value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'posts';
+        value: number | Post;
+      } | null)
+    | ({
+        relationTo: 'form-submissions';
+        value: number | FormSubmission;
+      } | null)
+    | ({
+        relationTo: 'newsletter-subscribers';
+        value: number | NewsletterSubscriber;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -240,6 +694,8 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  firstName?: T;
+  lastName?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -263,6 +719,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  caption?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -274,6 +731,259 @@ export interface MediaSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        card?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        hero?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "artists_select".
+ */
+export interface ArtistsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  portrait?: T;
+  medium?: T;
+  specialty?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  bio?: T;
+  isFeatured?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "galleries_select".
+ */
+export interface GalleriesSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  description?: T;
+  heroImage?: T;
+  order?: T;
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "paintings_select".
+ */
+export interface PaintingsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  artist?: T;
+  galleries?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  medium?: T;
+  dimensions?: T;
+  year?: T;
+  price?: T;
+  priceDisplay?: T;
+  status?: T;
+  isRecentAcquisition?: T;
+  acquiredDate?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages_select".
+ */
+export interface PagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  seo?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
+  layout?:
+    | T
+    | {
+        hero?:
+          | T
+          | {
+              eyebrow?: T;
+              headlineLine1?: T;
+              headlineLine2?: T;
+              subheadline?: T;
+              backgroundImage?: T;
+              primaryCta?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              secondaryCta?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        textBlock?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              body?: T;
+              background?: T;
+              id?: T;
+              blockName?: T;
+            };
+        blockquote?:
+          | T
+          | {
+              quote?: T;
+              attribution?: T;
+              id?: T;
+              blockName?: T;
+            };
+        timeline?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              milestones?:
+                | T
+                | {
+                    year?: T;
+                    title?: T;
+                    body?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        imageBreak?:
+          | T
+          | {
+              image?: T;
+              overlayText?: T;
+              id?: T;
+              blockName?: T;
+            };
+        ctaBand?:
+          | T
+          | {
+              heading?: T;
+              body?: T;
+              primaryCta?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              secondaryCta?:
+                | T
+                | {
+                    label?: T;
+                    href?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts_select".
+ */
+export interface PostsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  status?: T;
+  publishedAt?: T;
+  coverImage?: T;
+  excerpt?: T;
+  body?: T;
+  author?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "form-submissions_select".
+ */
+export interface FormSubmissionsSelect<T extends boolean = true> {
+  type?: T;
+  status?: T;
+  name?: T;
+  email?: T;
+  phone?: T;
+  subject?: T;
+  message?: T;
+  paintingRef?: T;
+  ipHash?: T;
+  adminNotes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-subscribers_select".
+ */
+export interface NewsletterSubscribersSelect<T extends boolean = true> {
+  email?: T;
+  source?: T;
+  unsubscribed?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -314,6 +1024,91 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Contact info, social links, and other global content.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  contact?: {
+    phone?: string | null;
+    email?: string | null;
+    address?: {
+      street?: string | null;
+      city?: string | null;
+      state?: string | null;
+      zip?: string | null;
+      area?: string | null;
+    };
+    hours?:
+      | {
+          /**
+           * e.g. "Mon–Fri"
+           */
+          days: string;
+          /**
+           * e.g. "9am–5pm"
+           */
+          hours: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  social?: {
+    facebook?: string | null;
+    instagram?: string | null;
+    twitter?: string | null;
+  };
+  tagline?: string | null;
+  /**
+   * Year prefix is added automatically.
+   */
+  copyright?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  contact?:
+    | T
+    | {
+        phone?: T;
+        email?: T;
+        address?:
+          | T
+          | {
+              street?: T;
+              city?: T;
+              state?: T;
+              zip?: T;
+              area?: T;
+            };
+        hours?:
+          | T
+          | {
+              days?: T;
+              hours?: T;
+              id?: T;
+            };
+      };
+  social?:
+    | T
+    | {
+        facebook?: T;
+        instagram?: T;
+        twitter?: T;
+      };
+  tagline?: T;
+  copyright?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

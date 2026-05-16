@@ -7,6 +7,14 @@ import sharp from 'sharp'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Artists } from './collections/Artists'
+import { Galleries } from './collections/Galleries'
+import { Paintings } from './collections/Paintings'
+import { Pages } from './collections/Pages'
+import { Posts } from './collections/Posts'
+import { FormSubmissions } from './collections/FormSubmissions'
+import { NewsletterSubscribers } from './collections/NewsletterSubscribers'
+import { SiteSettings } from './globals/SiteSettings'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -21,7 +29,18 @@ export default buildConfig({
       titleSuffix: " — Sherwood's Gallery",
     },
   },
-  collections: [Users, Media],
+  collections: [
+    Users,
+    Media,
+    Artists,
+    Galleries,
+    Paintings,
+    Pages,
+    Posts,
+    FormSubmissions,
+    NewsletterSubscribers,
+  ],
+  globals: [SiteSettings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
