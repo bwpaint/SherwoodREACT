@@ -5,6 +5,8 @@ import './styles.css'
 import { getSiteSettings } from '@/lib/payload'
 import { Navigation } from '@/components/site/Navigation'
 import { Footer } from '@/components/site/Footer'
+import { Analytics } from '@/components/site/Analytics'
+import { JsonLd, buildOrganizationSchema } from '@/components/site/JsonLd'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -41,12 +43,26 @@ export const metadata: Metadata = {
 export default async function FrontendLayout({ children }: { children: React.ReactNode }) {
   const settings = await getSiteSettings()
   const hours = (settings.contact?.hours || []) as Array<{ days: string; hours: string }>
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+
+  const orgSchema = buildOrganizationSchema({
+    name: "Sherwood's Gallery",
+    url: siteUrl,
+    description:
+      "Houston's premier fine art gallery since 1981. Original oil paintings, watercolors, bluebonnet art, landscapes, and expert archival framing.",
+    phone: settings.contact?.phone,
+    email: settings.contact?.email,
+    address: settings.contact?.address,
+  })
 
   return (
     <html
       lang="en"
       className={`${playfair.variable} ${lato.variable} ${cormorant.variable}`}
     >
+      <head>
+        <JsonLd data={orgSchema} />
+      </head>
       <body className="min-h-screen flex flex-col">
         <Navigation
           tagline={settings.tagline}
@@ -61,6 +77,7 @@ export default async function FrontendLayout({ children }: { children: React.Rea
           hours={hours}
           copyright={settings.copyright}
         />
+        <Analytics />
       </body>
     </html>
   )
