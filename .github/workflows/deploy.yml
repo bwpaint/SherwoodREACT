@@ -1,0 +1,31 @@
+name: Deploy to xCloud
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.XCLOUD_HOST }}
+          username: ${{ secrets.XCLOUD_USER }}
+          key: ${{ secrets.XCLOUD_SSH_KEY }}
+          script: |
+            set -euo pipefail
+            cd /var/www/sherwoods-gallery
+            git fetch --quiet
+            git reset --hard origin/main
+            export PATH="$HOME/.local/share/fnm/aliases/default/bin:$PATH"
+            pnpm install --frozen-lockfile
+            pnpm build
+            pm2 reload sherwoods --update-env
+            echo "✓ Deploy complete: $(git rev-parse --short HEAD)"
