@@ -32,4 +32,30 @@
   .eyebrow {
     @apply font-editorial italic text-base tracking-[0.1em];
   }
+
+  /* Rich-text prose styling (used by <RichText />) */
+  .prose-gallery {
+    @apply font-body text-[0.95rem] leading-[1.85];
+  }
+  .prose-gallery > p + p {
+    @apply mt-4;
+  }
+  .prose-gallery > h2 {
+    @apply font-display font-bold text-2xl mt-8 mb-3;
+  }
+  .prose-gallery > h3 {
+    @apply font-display font-semibold text-xl mt-6 mb-2;
+  }
+  .prose-gallery ul,
+  .prose-gallery ol {
+    @apply pl-6 my-3;
+  }
+  .prose-gallery ul { @apply list-disc; }
+  .prose-gallery ol { @apply list-decimal; }
+  .prose-gallery a {
+    @apply underline underline-offset-2 hover:text-gallery-gold-dark transition-colors;
+  }
+  .prose-gallery blockquote {
+    @apply border-l-[3px] border-gallery-gold pl-5 italic my-4;
+  }
 }
