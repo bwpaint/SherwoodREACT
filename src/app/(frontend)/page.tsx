@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/Button'
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-gallery-teal">
+    <section className="bg-gallery-teal">
       <Container className="py-20">
         <EyebrowHeading
           eyebrow="Sherwood's Gallery"
@@ -19,19 +19,22 @@ export default function HomePage() {
         />
 
         <p className="mt-8 max-w-prose text-gallery-cream/85 font-body text-lg">
-          The real home page is under construction (P4). For now you can preview the design
-          system or go straight to the CMS.
+          Full home page (hero, welcome band, gallery previews, featured artists, visit CTA)
+          comes in P4. The shell, nav, and footer are wired live to the CMS.
         </p>
 
         <div className="mt-10 flex flex-wrap gap-4">
-          <Button href="/styleguide" variant="gold">
-            View Style Guide
+          <Button href="/galleries" variant="gold">
+            Explore the Galleries
           </Button>
-          <Button href="/admin" variant="ghost">
-            Open Admin
+          <Button href="/contact" variant="ghost">
+            Visit Us
+          </Button>
+          <Button href="/styleguide" variant="ghost">
+            Style Guide
           </Button>
         </div>
       </Container>
-    </main>
+    </section>
   )
 }

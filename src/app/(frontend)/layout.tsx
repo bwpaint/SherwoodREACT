@@ -2,6 +2,9 @@ import React from 'react'
 import type { Metadata } from 'next'
 import { Playfair_Display, Lato, Cormorant_Garamond } from 'next/font/google'
 import './styles.css'
+import { getSiteSettings } from '@/lib/payload'
+import { Navigation } from '@/components/site/Navigation'
+import { Footer } from '@/components/site/Footer'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -35,13 +38,30 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
 }
 
-export default function FrontendLayout({ children }: { children: React.ReactNode }) {
+export default async function FrontendLayout({ children }: { children: React.ReactNode }) {
+  const settings = await getSiteSettings()
+  const hours = (settings.contact?.hours || []) as Array<{ days: string; hours: string }>
+
   return (
     <html
       lang="en"
       className={`${playfair.variable} ${lato.variable} ${cormorant.variable}`}
     >
-      <body className="min-h-screen">{children}</body>
+      <body className="min-h-screen flex flex-col">
+        <Navigation
+          tagline={settings.tagline}
+          phone={settings.contact?.phone}
+          email={settings.contact?.email}
+        />
+        <main className="flex-1">{children}</main>
+        <Footer
+          phone={settings.contact?.phone}
+          email={settings.contact?.email}
+          address={settings.contact?.address}
+          hours={hours}
+          copyright={settings.copyright}
+        />
+      </body>
     </html>
   )
 }
