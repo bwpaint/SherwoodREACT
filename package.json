@@ -20,7 +20,8 @@
     "seed": "node --env-file=.env --import tsx scripts/seed.ts",
     "seed:reset": "node --env-file=.env --import tsx scripts/seed.ts --reset",
     "migrate": "node --env-file=.env --import tsx scripts/migrate-legacy.ts",
-    "migrate:dry": "node --env-file=.env --import tsx scripts/migrate-legacy.ts --dry-run"
+    "migrate:dry": "node --env-file=.env --import tsx scripts/migrate-legacy.ts --dry-run",
+    "gallery:heroes": "node --env-file=.env --import tsx scripts/assign-gallery-heroes.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.0.0",
