@@ -1,59 +1,37 @@
-import { headers as getHeaders } from 'next/headers.js'
-import Image from 'next/image'
-import { getPayload } from 'payload'
-import React from 'react'
-import { fileURLToPath } from 'url'
+import { Container } from '@/components/ui/Container'
+import { EyebrowHeading } from '@/components/ui/EyebrowHeading'
+import { Button } from '@/components/ui/Button'
 
-import config from '@/payload.config'
-import './styles.css'
-
-export default async function HomePage() {
-  const headers = await getHeaders()
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { user } = await payload.auth({ headers })
-
-  const fileURL = `vscode://file/${fileURLToPath(import.meta.url)}`
-
+export default function HomePage() {
   return (
-    <div className="home">
-      <div className="content">
-        <picture>
-          <source srcSet="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg" />
-          <Image
-            alt="Payload Logo"
-            height={65}
-            src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-favicon.svg"
-            width={65}
-          />
-        </picture>
-        {!user && <h1>Welcome to your new project.</h1>}
-        {user && <h1>Welcome back, {user.email}</h1>}
-        <div className="links">
-          <a
-            className="admin"
-            href={payloadConfig.routes.admin}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Go to admin panel
-          </a>
-          <a
-            className="docs"
-            href="https://payloadcms.com/docs"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Documentation
-          </a>
+    <main className="min-h-screen bg-gallery-teal">
+      <Container className="py-20">
+        <EyebrowHeading
+          eyebrow="Sherwood's Gallery"
+          heading={
+            <>
+              Original Fine Art
+              <br />
+              <span className="text-gallery-gold-light">for Discerning Collectors</span>
+            </>
+          }
+          tone="dark"
+        />
+
+        <p className="mt-8 max-w-prose text-gallery-cream/85 font-body text-lg">
+          The real home page is under construction (P4). For now you can preview the design
+          system or go straight to the CMS.
+        </p>
+
+        <div className="mt-10 flex flex-wrap gap-4">
+          <Button href="/styleguide" variant="gold">
+            View Style Guide
+          </Button>
+          <Button href="/admin" variant="ghost">
+            Open Admin
+          </Button>
         </div>
-      </div>
-      <div className="footer">
-        <p>Update this page by editing</p>
-        <a className="codeLink" href={fileURL}>
-          <code>app/(frontend)/page.tsx</code>
-        </a>
-      </div>
-    </div>
+      </Container>
+    </main>
   )
 }
