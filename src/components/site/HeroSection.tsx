@@ -4,6 +4,13 @@ import { Button } from '@/components/ui/Button'
 type MediaLike = { url?: string | null; alt?: string | null } | null | undefined
 type CtaLike = { label?: string | null; href?: string | null } | null | undefined
 
+/**
+ * Default hero image baked into the repo at public/images/hero.webp.
+ * The CMS Pages.home.hero.backgroundImage overrides this if set.
+ */
+const DEFAULT_HERO_SRC = '/images/hero.webp'
+const DEFAULT_HERO_ALT = "Sherwood's Gallery interior — Houston, Texas"
+
 export function HeroSection({
   eyebrow,
   headlineLine1,
@@ -21,22 +28,21 @@ export function HeroSection({
   primaryCta?: CtaLike
   secondaryCta?: CtaLike
 }) {
+  const imgSrc = backgroundImage?.url || DEFAULT_HERO_SRC
+  const imgAlt = backgroundImage?.alt || DEFAULT_HERO_ALT
+
   return (
     <section
       className="relative isolate min-h-[88vh] flex items-center"
       style={{ minHeight: 'max(560px, 88vh)' }}
     >
-      {backgroundImage?.url ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={backgroundImage.url}
-          alt={backgroundImage.alt || ''}
-          className="absolute inset-0 w-full h-full object-cover -z-10"
-          style={{ objectPosition: 'center 40%' }}
-        />
-      ) : (
-        <div className="absolute inset-0 bg-gradient-to-br from-gallery-teal-deep via-gallery-teal-dark to-gallery-teal -z-10" />
-      )}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={imgSrc}
+        alt={imgAlt}
+        className="absolute inset-0 w-full h-full object-cover -z-10"
+        style={{ objectPosition: 'center 40%' }}
+      />
       <div
         aria-hidden
         className="absolute inset-0 -z-10"
