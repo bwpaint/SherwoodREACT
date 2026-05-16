@@ -18,7 +18,9 @@
     "db:down": "docker compose down",
     "db:logs": "docker compose logs -f postgres",
     "seed": "node --env-file=.env --import tsx scripts/seed.ts",
-    "seed:reset": "node --env-file=.env --import tsx scripts/seed.ts --reset"
+    "seed:reset": "node --env-file=.env --import tsx scripts/seed.ts --reset",
+    "migrate": "node --env-file=.env --import tsx scripts/migrate-legacy.ts",
+    "migrate:dry": "node --env-file=.env --import tsx scripts/migrate-legacy.ts --dry-run"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.0.0",
