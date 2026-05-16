@@ -101,3 +101,31 @@ export async function getPaintingsByArtist(artistId: number | string, limit = 6)
   })
   return res.docs
 }
+
+export async function getPublishedPosts(page = 1, limit = 10) {
+  const payload = await getPayloadClient()
+  return payload.find({
+    collection: 'posts',
+    where: { status: { equals: 'published' } },
+    sort: '-publishedAt',
+    page,
+    limit,
+    depth: 1,
+  })
+}
+
+export async function getPostBySlug(slug: string) {
+  const payload = await getPayloadClient()
+  const res = await payload.find({
+    collection: 'posts',
+    where: {
+      and: [
+        { slug: { equals: slug } },
+        { status: { equals: 'published' } },
+      ],
+    },
+    limit: 1,
+    depth: 2,
+  })
+  return res.docs[0] ?? null
+}
