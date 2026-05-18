@@ -105,7 +105,7 @@ export async function submitContact(
   const notifyTo = process.env.MAILGUN_NOTIFY_TO || 'art@sherwoodsgallery.com'
   const mailResult = await sendMail({
     to: notifyTo,
-    subject: `[Sherwood's] ${data.subject}`,
+    subject: `[Sherwoods] ${data.subject}`,
     replyTo: data.email,
     text: [
       `Type: ${data.type}`,

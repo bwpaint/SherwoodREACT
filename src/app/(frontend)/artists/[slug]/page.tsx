@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return pageMetadata({
     title: artist.name,
     description: specialty
-      ? `${artist.name} — ${specialty} represented by Sherwood's Gallery, Houston TX.`
-      : `${artist.name}, a fine artist represented by Sherwood's Gallery in Houston, Texas.`,
+      ? `${artist.name} — ${specialty} represented by Sherwoods Gallery, Houston TX.`
+      : `${artist.name}, a fine artist represented by Sherwoods Gallery in Houston, Texas.`,
     path: `/artists/${slug}`,
   })
 }

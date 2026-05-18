@@ -63,7 +63,7 @@ export const SiteSettings: GlobalConfig = {
     {
       name: 'copyright',
       type: 'text',
-      defaultValue: "Sherwood's Gallery, Inc. · Houston, Texas · All Rights Reserved",
+      defaultValue: "Sherwoods Gallery, Inc. · Houston, Texas · All Rights Reserved",
       admin: { description: 'Year prefix is added automatically.' },
     },
   ],

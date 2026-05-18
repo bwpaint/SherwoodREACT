@@ -82,7 +82,7 @@ export function Navigation({ tagline, phone, email }: Props) {
             {/* Logo */}
             <Link href="/" className="flex flex-col leading-tight">
               <span className="font-display font-bold text-gallery-cream text-2xl">
-                Sherwood&apos;s Gallery
+                Sherwoods Gallery
               </span>
               <span className="font-body font-bold text-gallery-gold-light text-[0.6rem] tracking-[0.15em] uppercase">
                 Original Fine Art · Houston, Texas

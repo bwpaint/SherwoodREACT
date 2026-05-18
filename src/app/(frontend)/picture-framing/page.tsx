@@ -7,7 +7,7 @@ import { pageMetadata } from '@/lib/seo'
 export const metadata = pageMetadata({
   title: 'Picture Framing',
   description:
-    "Sherwood's Gallery offers archival, museum-grade custom picture framing in Houston's Briargrove district. Acid-free mats, UV-filtering glass, hand-restored antique frames — since 1967.",
+    "Sherwoods Gallery offers archival, museum-grade custom picture framing in Houston's Briargrove district. Acid-free mats, UV-filtering glass, hand-restored antique frames — since 1967.",
   path: '/picture-framing',
 })
 
@@ -28,14 +28,14 @@ export default function PictureFramingPage() {
         <Container className="max-w-3xl">
           <div className="prose prose-lg font-body text-gallery-espresso">
             <p className="font-editorial italic text-xl text-gallery-teal-dark leading-relaxed mb-10">
-              For more than four decades, Sherwood&apos;s Gallery has been the trusted destination for serious art
+              For more than four decades, Sherwoods Gallery has been the trusted destination for serious art
               collectors in Houston&apos;s Briargrove neighborhood. What sets us apart isn&apos;t just the calibre of
               original fine art on our walls — it&apos;s that every piece we sell, and every piece our clients bring
               to us, can be framed with the same level of care and craftsmanship right here under one roof.
             </p>
 
             <p>
-              Our Picture Framing Department was established in 1981, the same year Sherwood&apos;s Gallery first
+              Our Picture Framing Department was established in 1981, the same year Sherwoods Gallery first
               opened its doors. The roots of our framing practice, however, run even deeper. <strong>Sherwood P.
               McCall III</strong> has worked in the world of fine art and picture framing since 1967 — more than
               fifty years of hands-on experience selecting moldings, conserving surfaces, mounting watercolors,

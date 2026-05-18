@@ -37,7 +37,7 @@ export function Footer({ phone, email, address, hours, copyright }: Props) {
           {/* Column 1: Brand */}
           <div>
             <h3 className="font-display font-bold text-2xl text-gallery-cream">
-              Sherwood&apos;s Gallery
+              Sherwoods Gallery
             </h3>
             <p className="font-editorial italic text-gallery-gold-light text-sm tracking-[0.1em] mt-2">
               Original Fine Art · Houston, Texas
@@ -109,7 +109,7 @@ export function Footer({ phone, email, address, hours, copyright }: Props) {
         </div>
 
         <div className="mt-10 pt-6 border-t border-gallery-cream/15 text-center font-body text-xs text-gallery-cream/65">
-          © {year} {copyright || "Sherwood's Gallery, Inc. · All Rights Reserved"}
+          © {year} {copyright || "Sherwoods Gallery, Inc. · All Rights Reserved"}
         </div>
       </Container>
     </footer>

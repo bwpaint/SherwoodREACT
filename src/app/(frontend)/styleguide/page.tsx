@@ -23,7 +23,7 @@ const colors: Array<{ name: string; hex: string; usage: string; dark?: boolean }
 
 export const metadata = {
   title: 'Style Guide',
-  description: 'Internal design-system reference for Sherwood\'s Gallery.',
+  description: 'Internal design-system reference for Sherwoods Gallery.',
   robots: { index: false, follow: false },
 }
 
@@ -35,7 +35,7 @@ export default function StyleguidePage() {
         <Container className="py-16">
           <EyebrowHeading eyebrow="Internal Reference" heading="Style Guide" tone="dark" />
           <p className="mt-6 max-w-prose text-gallery-cream/85 font-body">
-            Design tokens and component primitives for Sherwood&apos;s Gallery. Verify here
+            Design tokens and component primitives for Sherwoods Gallery. Verify here
             against the handoff PDF before building pages.
           </p>
         </Container>
@@ -99,7 +99,7 @@ export default function StyleguidePage() {
                 Body — Lato 400
               </div>
               <p className="font-body text-gallery-cream/90 max-w-prose">
-                At Sherwood&apos;s Gallery, we have been serving the discerning artist and
+                At Sherwoods Gallery, we have been serving the discerning artist and
                 collector since 1981. Located in Houston&apos;s Briargrove area near the famous
                 Galleria district.
               </p>
@@ -198,7 +198,7 @@ export default function StyleguidePage() {
             <div className="bg-gallery-teal-deep p-8">
               <EyebrowHeading
                 eyebrow="Centered"
-                heading="Welcome to Sherwood&rsquo;s"
+                heading="Welcome to Sherwoods"
                 tone="dark"
                 align="center"
               />

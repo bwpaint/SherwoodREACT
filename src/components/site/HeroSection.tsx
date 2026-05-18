@@ -9,7 +9,7 @@ type CtaLike = { label?: string | null; href?: string | null } | null | undefine
  * The CMS Pages.home.hero.backgroundImage overrides this if set.
  */
 const DEFAULT_HERO_SRC = '/images/hero.webp'
-const DEFAULT_HERO_ALT = "Sherwood's Gallery interior — Houston, Texas"
+const DEFAULT_HERO_ALT = "Sherwoods Gallery interior — Houston, Texas"
 
 export function HeroSection({
   eyebrow,

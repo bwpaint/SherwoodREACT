@@ -15,7 +15,7 @@ export function pageMetadata(input: {
       title: input.title,
       description: input.description,
       url,
-      siteName: "Sherwood's Gallery",
+      siteName: "Sherwoods Gallery",
       type: 'website',
       images: input.image ? [{ url: input.image }] : undefined,
     },

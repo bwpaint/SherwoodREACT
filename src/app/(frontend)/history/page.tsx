@@ -7,7 +7,7 @@ import { pageMetadata } from '@/lib/seo'
 export const metadata = pageMetadata({
   title: 'Our History',
   description:
-    "Serving Houston's discerning collectors since 1981. The story of Sherwood's Gallery, founded by Sherwood P. McCall III and chronicled by Ron Crouch.",
+    "Serving Houston's discerning collectors since 1981. The story of Sherwoods Gallery, founded by Sherwood P. McCall III and chronicled by Ron Crouch.",
   path: '/history',
 })
 
@@ -48,7 +48,7 @@ export default function HistoryPage() {
               A Houston Institution Since 1981
             </h2>
             <p>
-              Sherwood&apos;s Gallery has stood in Houston&apos;s Briargrove neighborhood, just steps from the
+              Sherwoods Gallery has stood in Houston&apos;s Briargrove neighborhood, just steps from the
               famous Galleria district, for more than forty years. What began in 1981 as a single storefront has
               become one of the city&apos;s enduring destinations for original fine art — a place where serious
               collectors and emerging artists alike know they will be treated with the seriousness their work
@@ -57,7 +57,7 @@ export default function HistoryPage() {
             <p>
               The gallery&apos;s founder and president, <strong>Sherwood P. McCall III</strong>, has spent his
               entire working life in service of art. His career in the fine art trade began in 1967, well before
-              Sherwood&apos;s Gallery itself was founded. Those fourteen years between his entry into the field
+              Sherwoods Gallery itself was founded. Those fourteen years between his entry into the field
               and the gallery&apos;s opening were spent learning the craft of picture framing at a level that few
               practitioners ever reach — the kind of meticulous archival work that today&apos;s conservators
               consider standard practice but that was, in those years, the province of museums and rare specialty
@@ -74,7 +74,7 @@ export default function HistoryPage() {
 
             <h2 className="font-display text-3xl text-gallery-espresso mt-12 mb-4">The Gallery&apos;s Approach</h2>
             <p>
-              Sherwood&apos;s Gallery has evolved over four decades as both <strong>procurer of fine art</strong>
+              Sherwoods Gallery has evolved over four decades as both <strong>procurer of fine art</strong>
               {' '}and <strong>meticulous preserver</strong> of fine oils, watercolors, and multi-medium works
               collected from artists across Texas, the United States, and around the world. Our pursuit has always
               been the same: to provide artists with the opportunity to sell their work in a professional manner —
@@ -139,7 +139,7 @@ export default function HistoryPage() {
 
             <h2 className="font-display text-3xl text-gallery-espresso mt-12 mb-4">Today</h2>
             <p>
-              Sherwood&apos;s Gallery has emerged, in the decades since 1981, as the vanguard of its segment of the
+              Sherwoods Gallery has emerged, in the decades since 1981, as the vanguard of its segment of the
               Houston art market — a small gallery in scale but one with an outsized reputation for both
               connoisseurship and conservation. We were among the first independent galleries in the region to
               couple traditional in-person viewing with a fully searchable online catalog, allowing collectors
@@ -161,7 +161,7 @@ export default function HistoryPage() {
       <ImageBreakBlock overlayText="Serving Houston's Collectors Since 1981" />
 
       <CtaBandBlock
-        heading="Visit Sherwood's Gallery"
+        heading="Visit Sherwoods Gallery"
         body="Whether you're a long-time collector or just beginning to explore original fine art, we'd be glad to welcome you to our gallery in the heart of Houston's Briargrove district."
         primaryCta={{ label: 'Plan Your Visit', href: '/contact' }}
       />

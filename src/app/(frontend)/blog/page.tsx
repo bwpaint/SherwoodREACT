@@ -7,7 +7,7 @@ import { pageMetadata } from '@/lib/seo'
 
 export const metadata = pageMetadata({
   title: 'Blog',
-  description: "News, exhibitions, and stories from Sherwood's Gallery.",
+  description: "News, exhibitions, and stories from Sherwoods Gallery.",
   path: '/blog',
 })
 

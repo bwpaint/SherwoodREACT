@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/Button'
 
 export function VisitCTABand({
   heading = 'Come See the Gallery in Person',
-  body = 'A visit to Sherwood’s is the best way to experience the work. We’re in the Briargrove area near the Galleria — walk-ins always welcome.',
+  body = 'A visit to Sherwoods is the best way to experience the work. We’re in the Briargrove area near the Galleria — walk-ins always welcome.',
   primaryHref = '/contact',
   primaryLabel = 'Get Directions',
   secondaryHref = '/history',

@@ -7,7 +7,7 @@ import { pageMetadata } from '@/lib/seo'
 export const metadata = pageMetadata({
   title: 'Our Artists',
   description:
-    "Meet the acclaimed Texas artists represented by Sherwood's Gallery — oil painters, watercolorists, sculptors, and pastelists working in the great Texas tradition.",
+    "Meet the acclaimed Texas artists represented by Sherwoods Gallery — oil painters, watercolorists, sculptors, and pastelists working in the great Texas tradition.",
   path: '/artists',
 })
 

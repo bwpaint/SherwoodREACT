@@ -32,8 +32,8 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: {
-    default: "Sherwood's Gallery — Original Fine Art, Houston, Texas",
-    template: "%s — Sherwood's Gallery",
+    default: "Sherwoods Gallery — Original Fine Art, Houston, Texas",
+    template: "%s — Sherwoods Gallery",
   },
   description:
     "Houston's premier fine art gallery since 1981. Original oil paintings, watercolors, bluebonnet art, landscapes, and expert archival framing in the Briargrove area.",
@@ -46,7 +46,7 @@ export default async function FrontendLayout({ children }: { children: React.Rea
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
   const orgSchema = buildOrganizationSchema({
-    name: "Sherwood's Gallery",
+    name: "Sherwoods Gallery",
     url: siteUrl,
     description:
       "Houston's premier fine art gallery since 1981. Original oil paintings, watercolors, bluebonnet art, landscapes, and expert archival framing.",

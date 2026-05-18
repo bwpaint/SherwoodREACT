@@ -8,9 +8,9 @@ import { getSiteSettings } from '@/lib/payload'
 import { pageMetadata } from '@/lib/seo'
 
 export const metadata = pageMetadata({
-  title: "Contact Sherwood's Gallery",
+  title: "Contact Sherwoods Gallery",
   description:
-    "Visit Sherwood's Gallery at 2618 Briar Ridge Drive, Houston, TX 77057. Call (713) 974-3700 or email art@sherwoodsgallery.com.",
+    "Visit Sherwoods Gallery at 2618 Briar Ridge Drive, Houston, TX 77057. Call (713) 974-3700 or email art@sherwoodsgallery.com.",
   path: '/contact',
 })
 
@@ -177,7 +177,7 @@ export default async function ContactPage() {
           >
             <iframe
               src={mapsEmbed}
-              title="Map to Sherwood's Gallery"
+              title="Map to Sherwoods Gallery"
               width="100%"
               height="400"
               loading="lazy"

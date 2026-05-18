@@ -32,7 +32,7 @@ type TextBlock = {
 }
 
 const WELCOME_FALLBACK =
-  "At Sherwood's Gallery, we have been serving the discerning artist and collector since 1981. Located in Houston's Briargrove area near the famous Galleria district, we offer acclaimed artists widely celebrated in Texas, the United States, and around the world — alongside expert archival picture framing."
+  "At Sherwoods Gallery, we have been serving the discerning artist and collector since 1981. Located in Houston's Briargrove area near the famous Galleria district, we offer acclaimed artists widely celebrated in Texas, the United States, and around the world — alongside expert archival picture framing."
 
 function findBlock<T extends { blockType: string }>(layout: unknown, type: string): T | null {
   if (!Array.isArray(layout)) return null
@@ -75,7 +75,7 @@ export default async function HomePage() {
 
       {/* Section 2 — Welcome Band */}
       <WelcomeBand
-        heading={welcome?.heading || "Welcome to Sherwood's Gallery"}
+        heading={welcome?.heading || "Welcome to Sherwoods Gallery"}
         body={WELCOME_FALLBACK}
       />
 
