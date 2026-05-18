@@ -8,7 +8,7 @@ import { pageMetadata } from '@/lib/seo'
 export async function generateStaticParams() {
   const artists = await getAllArtists()
   return artists
-    .filter((a) => !!a.slug)
+    .filter((a) => !!a.slug && (a as { hasDetailPage?: boolean }).hasDetailPage !== false)
     .map((a) => ({ slug: a.slug as string }))
 }
 
@@ -34,6 +34,7 @@ export default async function ArtistDetailPage({
   const { slug } = await params
   const artist = await getArtistBySlug(slug)
   if (!artist) notFound()
+  if ((artist as { hasDetailPage?: boolean }).hasDetailPage === false) notFound()
 
   const paintings = await getPaintingsByArtist(artist.id, 6)
 

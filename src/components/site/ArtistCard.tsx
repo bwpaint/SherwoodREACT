@@ -8,7 +8,7 @@ export function ArtistCard({
   specialty,
   portrait,
   bioSnippet,
-  href = '/artists',
+  href,
   aspect = 'aspect-[3/4]',
   className,
 }: {
@@ -16,27 +16,35 @@ export function ArtistCard({
   specialty?: string
   portrait?: MediaLike
   bioSnippet?: string
+  /** If undefined, card renders as a non-clickable static element. */
   href?: string
   aspect?: string
   className?: string
 }) {
-  return (
-    <Link
-      href={href}
-      className={cn(
-        'group block bg-gallery-ivory transition-all duration-200 ease-gallery-out',
-        'hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(44,24,16,0.15)]',
-        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gallery-gold focus-visible:ring-offset-2',
-        className,
-      )}
-    >
+  const interactive = !!href
+
+  const containerClass = cn(
+    'block bg-gallery-ivory transition-all duration-200 ease-gallery-out',
+    interactive && [
+      'group',
+      'hover:-translate-y-1 hover:shadow-[0_8px_24px_rgba(44,24,16,0.15)]',
+      'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gallery-gold focus-visible:ring-offset-2',
+    ],
+    className,
+  )
+
+  const inner = (
+    <>
       <div className={cn('relative overflow-hidden border-b-[3px] border-gallery-gold', aspect)}>
         {portrait?.url ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={portrait.url}
             alt={portrait.alt || name}
-            className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 ease-gallery-out group-hover:scale-105"
+            className={cn(
+              'absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 ease-gallery-out',
+              interactive && 'group-hover:scale-105',
+            )}
             style={{ filter: 'sepia(10%) saturate(90%)' }}
             loading="lazy"
           />
@@ -63,6 +71,16 @@ export function ArtistCard({
           </p>
         )}
       </div>
-    </Link>
+    </>
   )
+
+  if (interactive) {
+    return (
+      <Link href={href!} className={containerClass}>
+        {inner}
+      </Link>
+    )
+  }
+
+  return <div className={containerClass}>{inner}</div>
 }

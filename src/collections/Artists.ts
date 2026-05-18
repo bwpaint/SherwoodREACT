@@ -8,7 +8,7 @@ export const Artists: CollectionConfig = {
   labels: { singular: 'Artist', plural: 'Artists' },
   admin: {
     useAsTitle: 'name',
-    defaultColumns: ['name', 'specialty', 'isFeatured', 'order'],
+    defaultColumns: ['name', 'specialty', 'hasDetailPage', 'isFeatured', 'order'],
     group: 'Gallery',
   },
   access: {
@@ -51,6 +51,16 @@ export const Artists: CollectionConfig = {
     },
     { name: 'bio', type: 'richText' },
     {
+      name: 'hasDetailPage',
+      type: 'checkbox',
+      defaultValue: true,
+      admin: {
+        position: 'sidebar',
+        description:
+          'When ON, this artist gets a clickable /artists/[slug] detail page with their full bio and works. When OFF, they appear only as a small card on the Artists page (no link).',
+      },
+    },
+    {
       name: 'isFeatured',
       type: 'checkbox',
       defaultValue: false,
@@ -62,10 +72,11 @@ export const Artists: CollectionConfig = {
     {
       name: 'order',
       type: 'number',
-      defaultValue: 0,
+      defaultValue: 100,
       admin: {
         position: 'sidebar',
-        description: 'Lower numbers appear first.',
+        description:
+          'Display order on the Artists page. Lower numbers appear first. Use multiples of 10 (10, 20, 30, 40, 50…) so you can drop a new artist between two existing ones later without re-numbering everyone.',
       },
     },
   ],

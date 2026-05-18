@@ -60,6 +60,7 @@ export default async function ArtistsPage() {
                   : undefined
               const specialty = (artist.specialty?.[0] as any)?.tag ?? undefined
               const aspect = ASPECTS[ASPECT_PATTERN[i % ASPECT_PATTERN.length]]
+              const linkable = (artist as { hasDetailPage?: boolean }).hasDetailPage !== false
               return (
                 <div key={artist.id} className="break-inside-avoid mb-4">
                   <ArtistCard
@@ -67,7 +68,7 @@ export default async function ArtistsPage() {
                     specialty={specialty}
                     portrait={portrait}
                     bioSnippet={lexicalSnippet(artist.bio)}
-                    href={`/artists/${artist.slug}`}
+                    href={linkable ? `/artists/${artist.slug}` : undefined}
                     aspect={aspect}
                   />
                 </div>
