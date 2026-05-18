@@ -16,6 +16,7 @@ const QUICK_LINKS = [
   { href: '/', label: 'Home' },
   { href: '/galleries', label: 'Art Galleries' },
   { href: '/artists', label: 'Artists' },
+  { href: '/picture-framing', label: 'Picture Framing' },
   { href: '/history', label: 'History' },
   { href: '/contact', label: 'Contact Us' },
   { href: '/blog', label: 'Blog' },
