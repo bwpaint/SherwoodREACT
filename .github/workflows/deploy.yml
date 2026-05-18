@@ -1,8 +1,12 @@
-name: Deploy to xCloud
+# DISABLED — Sherwoods Gallery moved to Vercel (auto-deploys via GitHub
+# integration in the Vercel dashboard). This workflow is kept as a reference
+# in case we ever revive an xCloud deploy. The push trigger has been removed
+# so it no longer fires automatically. To run it manually, trigger via the
+# Actions tab → "Deploy to xCloud (disabled)" → Run workflow.
+
+name: Deploy to xCloud (disabled)
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 concurrency:
