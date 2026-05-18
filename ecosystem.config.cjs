@@ -17,8 +17,8 @@ module.exports = {
         NODE_ENV: 'production',
         NODE_OPTIONS: '--no-deprecation',
       },
-      out_file: '/var/log/sherwoods/out.log',
-      error_file: '/var/log/sherwoods/error.log',
+      // PM2 default log location: ~/.pm2/logs/
+      // Custom /var/log paths require root permissions xCloud doesn't grant the site user.
       time: true,
     },
   ],
