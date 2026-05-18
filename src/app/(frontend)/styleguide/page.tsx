@@ -110,7 +110,7 @@ export default function StyleguidePage() {
                 Caption — Cormorant Garamond italic small
               </div>
               <span className="font-editorial italic text-gallery-gold-light text-sm">
-                Oil on canvas · 24" × 36"
+                Oil on canvas · 24″ × 36″
               </span>
             </div>
           </div>

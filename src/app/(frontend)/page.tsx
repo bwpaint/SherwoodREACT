@@ -133,7 +133,7 @@ export default async function HomePage() {
                     specialty={specialty}
                     portrait={typeof a.portrait === 'object' ? a.portrait : null}
                     bioSnippet={a.medium ?? undefined}
-                    href="/artists"
+                    href={a.slug ? `/artists/${a.slug}` : '/artists'}
                   />
                 </RevealSection>
               )

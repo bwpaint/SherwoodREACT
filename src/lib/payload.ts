@@ -129,3 +129,14 @@ export async function getPostBySlug(slug: string) {
   })
   return res.docs[0] ?? null
 }
+
+export async function getArtistBySlug(slug: string) {
+  const payload = await getPayloadClient()
+  const res = await payload.find({
+    collection: 'artists',
+    where: { slug: { equals: slug } },
+    limit: 1,
+    depth: 1,
+  })
+  return res.docs[0] ?? null
+}

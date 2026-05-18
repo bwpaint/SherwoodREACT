@@ -24,7 +24,6 @@ jobs:
             cd /var/www/sherwoods-gallery
             git fetch --quiet
             git reset --hard origin/main
-            export PATH="$HOME/.local/share/fnm/aliases/default/bin:$PATH"
             pnpm install --frozen-lockfile
             pnpm build
             pm2 reload sherwoods --update-env

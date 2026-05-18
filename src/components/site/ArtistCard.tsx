@@ -9,6 +9,7 @@ export function ArtistCard({
   portrait,
   bioSnippet,
   href = '/artists',
+  aspect = 'aspect-[3/4]',
   className,
 }: {
   name: string
@@ -16,6 +17,7 @@ export function ArtistCard({
   portrait?: MediaLike
   bioSnippet?: string
   href?: string
+  aspect?: string
   className?: string
 }) {
   return (
@@ -28,7 +30,7 @@ export function ArtistCard({
         className,
       )}
     >
-      <div className="relative overflow-hidden aspect-square border-b-[3px] border-gallery-gold">
+      <div className={cn('relative overflow-hidden border-b-[3px] border-gallery-gold', aspect)}>
         {portrait?.url ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img

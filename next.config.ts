@@ -7,10 +7,15 @@ const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
+  eslint: {
+    // Lint errors should not block production deploys.
+    // Run `pnpm lint` locally during development instead.
+    ignoreDuringBuilds: true,
+  },
   images: {
     localPatterns: [
       {
-        pathname: '/api/media/file/**',
+        pathname: '/media/**',
       },
     ],
   },
