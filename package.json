@@ -22,13 +22,15 @@
     "migrate": "node --env-file=.env --import tsx scripts/migrate-legacy.ts",
     "migrate:dry": "node --env-file=.env --import tsx scripts/migrate-legacy.ts --dry-run",
     "gallery:heroes": "node --env-file=.env --import tsx scripts/assign-gallery-heroes.ts",
-    "fix:filenames": "node --env-file=.env --import tsx scripts/fix-encoded-filenames.ts"
+    "fix:filenames": "node --env-file=.env --import tsx scripts/fix-encoded-filenames.ts",
+    "blob:migrate": "node --env-file=.env.local --import tsx scripts/migrate-media-to-blob.ts"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.0.0",
     "@payloadcms/next": "^3.0.0",
     "@payloadcms/richtext-lexical": "^3.0.0",
     "@payloadcms/storage-vercel-blob": "^3.0.0",
+    "@vercel/blob": "^0.27.0",
     "@payloadcms/ui": "^3.0.0",
     "cross-env": "^10.1.0",
     "dotenv": "^16.4.7",
