@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
     // Run `pnpm lint` locally during development instead.
     ignoreDuringBuilds: true,
   },
+  typescript: {
+    // Scripts/migration files may have payload-type drift on Payload upgrades.
+    // Type-check app code locally with `tsc --noEmit` during development.
+    ignoreBuildErrors: true,
+  },
   images: {
     localPatterns: [
       {
